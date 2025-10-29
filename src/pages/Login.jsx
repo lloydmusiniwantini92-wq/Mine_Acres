@@ -28,11 +28,11 @@ export default function Login() {
             transition={{ duration: 1 }}
             className="relative flex items-center justify-center min-h-screen overflow-hidden"
         >
-            {/* 🪨 Background image */}
+            {/* 🪨 Background image (fixes GitHub Pages path) */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: "url('/images/mine_acres.png')",
+                    backgroundImage: `url(${import.meta.env.BASE_URL}images/mine_acres.png)`,
                 }}
             />
 
