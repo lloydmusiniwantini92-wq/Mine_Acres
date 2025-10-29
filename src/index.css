@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-dark: #0e0f12;
+    --card-dark: #16181d;
+    --accent: #00e0b8;
+    --accent-secondary: #f5b400;
+}
+
+body {
+    @apply bg-[var(--bg-dark)] text-gray-100 font-inter;
+}
+
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-plex {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.card {
+    @apply bg-[var(--card-dark)] rounded-2xl p-6 shadow-lg shadow-black/40 border border-gray-800;
+}
+
+.btn {
+    @apply px-4 py-2 rounded-lg font-semibold transition;
+}
+
+.btn-accent {
+    @apply bg-[var(--accent)] text-black hover:opacity-90;
+}
+
+.btn-secondary {
+    @apply bg-[var(--accent-secondary)] text-black hover:opacity-90;
+}
