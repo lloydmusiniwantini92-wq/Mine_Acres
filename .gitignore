@@ -1,9 +1,15 @@
+# dependencies
 node_modules
 dist
+
+# IDE / system files
 .vscode
 .vs
-.env
 Thumbs.db
 .DS_Store
 *.log
 .cache
+.env
+
+# build artifacts
+*.local
