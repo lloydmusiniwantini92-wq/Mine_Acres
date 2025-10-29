@@ -5,13 +5,13 @@ const bravePath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\
 
 export default defineConfig(({ command }) => ({
     plugins: [react()],
-    // 👇 This is the important line
-    base: "/Mine_Acres/",
-    server: command === "serve"
-        ? {
-            port: 5173,
-            open: true,
-            browser: bravePath,
-        }
-        : undefined,
+    base: "/Mine_Acres/", // 👈 REQUIRED for GitHub Pages
+    server:
+        command === "serve"
+            ? {
+                port: 5173,
+                open: true,
+                browser: bravePath,
+            }
+            : undefined,
 }));

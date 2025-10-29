@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import mineBg from "/images/mine_acres.png"; // ✅ imported directly from /public
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -28,11 +29,11 @@ export default function Login() {
             transition={{ duration: 1 }}
             className="relative flex items-center justify-center min-h-screen overflow-hidden"
         >
-            {/* 🪨 Background image (fixes GitHub Pages path) */}
+            {/* 🪨 Background image (works locally + GitHub Pages) */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: `url(${import.meta.env.BASE_URL}images/mine_acres.png)`,
+                    backgroundImage: `url(${mineBg})`,
                 }}
             />
 
