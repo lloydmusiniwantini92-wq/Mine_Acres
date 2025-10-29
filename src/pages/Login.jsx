@@ -17,7 +17,7 @@ export default function Login() {
         setTimeout(() => {
             login(username, role);
             navigate("/");
-        }, 1200);
+        }, 1500);
     };
 
     return (
@@ -28,23 +28,35 @@ export default function Login() {
             transition={{ duration: 1 }}
             className="relative flex items-center justify-center min-h-screen overflow-hidden"
         >
-            {/* Background image */}
+            {/* 🎥 Animated fog / lighting overlay */}
+            <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#0a0f0f] via-transparent to-[#0f0f10]"
+                animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+                transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+                style={{
+                    backgroundSize: "400% 400%",
+                    opacity: 0.4,
+                }}
+            />
+
+            {/* 🪨 Background image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: `url(${import.meta.env.BASE_URL}images/mine_acres.png)`,
+                    filter: "brightness(0.8)",
                 }}
             />
 
-            {/* Login form */}
+            {/* 💠 Stylized login form */}
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.9 }}
                 className="relative max-w-sm w-full text-center p-8"
                 style={{
-                    background: "rgba(18, 20, 25, 0.4)",
-                    backdropFilter: "blur(10px)",
+                    background: "rgba(18, 20, 25, 0.45)",
+                    backdropFilter: "blur(14px)",
                     clipPath:
                         "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)",
                     boxShadow:
@@ -52,15 +64,17 @@ export default function Login() {
                 }}
             >
                 <h1
-                    className="text-5xl font-[Montserrat] font-black text-[var(--accent)] mb-8 uppercase tracking-widest"
+                    className="text-5xl font-[Montserrat] font-extrabold text-[var(--accent)] mb-8 uppercase tracking-widest"
                     style={{
-                        textShadow: "0 0 14px rgba(0,224,184,0.4)",
+                        textShadow: "0 0 18px rgba(0,224,184,0.5)",
+                        letterSpacing: "2px",
                     }}
                 >
                     Mine Acres
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Username Input */}
                     <input
                         type="text"
                         placeholder="Username"
@@ -71,6 +85,7 @@ export default function Login() {
                         required
                     />
 
+                    {/* Role Selection */}
                     <select
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
@@ -82,13 +97,16 @@ export default function Login() {
                         <option value="worker">Worker</option>
                     </select>
 
-                    <button
+                    {/* Submit Button */}
+                    <motion.button
                         type="submit"
                         disabled={loading}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                         className="w-full bg-[var(--accent)] text-black font-semibold py-2 transition hover:opacity-90 shadow-[0_0_15px_rgba(0,224,184,0.4)]"
                     >
                         {loading ? "Loading Systems…" : "Enter Dashboard"}
-                    </button>
+                    </motion.button>
                 </form>
 
                 <p className="mt-6 text-sm text-gray-300/80 tracking-wide uppercase">

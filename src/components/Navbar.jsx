@@ -13,7 +13,8 @@ export default function Navbar() {
     if (location.pathname === "/login") return null;
 
     const navLinks = [
-        { path: "/", label: "Operations" },
+        { path: "/", label: "Dashboard" },
+        { path: "/operations", label: "Operations" },
         { path: "/performance", label: "Performance" },
         { path: "/finance", label: "Finance & Sustain" },
         { path: "/smartmine", label: "Smart Mine" },
@@ -31,28 +32,26 @@ export default function Navbar() {
 
     return (
         <>
-            {/* 🔹 Top bar */}
             <motion.nav
                 initial={{ y: -60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-[var(--card-dark)] border-b border-gray-800 px-6 py-4 shadow-md"
+                className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-[#0a0b0d]/90 border-b border-gray-800 px-6 py-4 backdrop-blur-md"
             >
                 <h1
-                    className="text-2xl font-bold text-[var(--accent)] tracking-wide cursor-pointer"
+                    className="text-3xl font-[Montserrat] font-extrabold uppercase tracking-[0.25em] bg-gradient-to-r from-[#00ffa6] to-[#009bff] text-transparent bg-clip-text cursor-pointer"
                     onClick={() => navigate("/")}
                 >
-                    Comedy Mine
+                    Mine Acres
                 </h1>
 
                 <div className="flex items-center gap-3">
-                    {/* username only in closed state */}
                     <span className="hidden sm:block text-gray-400 text-sm">
-                        Hi, {user?.username}
+                        {user?.username && `Hi, ${user.username}`}
                     </span>
                     <button
                         onClick={() => setOpen(true)}
-                        className="text-[var(--accent)] hover:scale-110 transition"
+                        className="text-[#00ffa6] hover:scale-110 transition"
                         aria-label="Open menu"
                     >
                         <Menu size={30} />
@@ -60,11 +59,9 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* 🔸 Overlay Menu */}
             <AnimatePresence>
                 {open && (
                     <>
-                        {/* Background dim */}
                         <motion.div
                             className="fixed inset-0 bg-black/70 backdrop-blur-md z-40"
                             initial={{ opacity: 0 }}
@@ -73,23 +70,20 @@ export default function Navbar() {
                             onClick={() => setOpen(false)}
                         />
 
-                        {/* Slide-in panel */}
                         <motion.aside
-                            className="fixed inset-0 z-50 flex flex-col items-center justify-center text-center overflow-hidden bg-gradient-to-b from-[var(--card-dark)] via-[#111115] to-[#0a0a0b]"
+                            className="fixed inset-0 z-50 flex flex-col items-center justify-center text-center overflow-hidden bg-gradient-to-b from-[#0d0f10] via-[#0a0b0d] to-[#050505]"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.6 }}
                         >
-                            {/* Close button */}
                             <button
                                 onClick={() => setOpen(false)}
-                                className="absolute top-6 right-8 text-gray-400 hover:text-[var(--accent)]"
+                                className="absolute top-6 right-8 text-gray-400 hover:text-[#00ffa6]"
                             >
                                 <X size={36} />
                             </button>
 
-                            {/* Cascading menu items */}
                             <motion.div
                                 initial="hidden"
                                 animate="visible"
@@ -108,18 +102,17 @@ export default function Navbar() {
                                                 to={link.path}
                                                 onClick={() => setOpen(false)}
                                                 className={`${active
-                                                        ? "text-[var(--accent-secondary)]"
-                                                        : "hover:text-[var(--accent)]"
+                                                    ? "text-[#00ffa6]"
+                                                    : "hover:text-[#00d4ff]"
                                                     } transition`}
                                             >
                                                 {link.label}
                                             </Link>
 
-                                            {/* Cross-out line animation for active page */}
                                             {active && (
                                                 <motion.span
                                                     layoutId="underline"
-                                                    className="absolute left-0 right-0 top-1/2 h-[2px] bg-[var(--accent-secondary)] origin-left"
+                                                    className="absolute left-0 right-0 top-1/2 h-[2px] bg-[#00ffa6] origin-left"
                                                     initial={{ scaleX: 0 }}
                                                     animate={{ scaleX: 1 }}
                                                     transition={{ duration: 0.5 }}
@@ -130,10 +123,8 @@ export default function Navbar() {
                                 })}
                             </motion.div>
 
-                            {/* Bottom mist fade */}
-                            <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none bg-gradient-to-t from-black via-transparent opacity-60" />
+                            <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none bg-gradient-to-t from-black via-transparent opacity-70" />
 
-                            {/* Logout button only */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -145,7 +136,7 @@ export default function Navbar() {
                                         logout();
                                         navigate("/login");
                                     }}
-                                    className="btn btn-secondary text-black font-semibold px-6 py-2 text-lg"
+                                    className="bg-[#00ffa6] text-black font-semibold px-8 py-3 rounded-none uppercase tracking-wider hover:bg-[#00d4ff] transition-all"
                                 >
                                     Logout
                                 </button>

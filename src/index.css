@@ -38,3 +38,47 @@ body {
 .btn-secondary {
     @apply bg-[var(--accent-secondary)] text-black hover:opacity-90;
 }
+/* === Additional Mine Acres Theme Enhancements === */
+
+::selection {
+    background: rgba(0, 224, 184, 0.3);
+    color: white;
+}
+
+.glow-text {
+    text-shadow: 0 0 20px rgba(0, 255, 166, 0.4);
+}
+
+.data-pulse {
+    animation: pulseData 2s infinite ease-in-out;
+}
+
+@keyframes pulseData {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
