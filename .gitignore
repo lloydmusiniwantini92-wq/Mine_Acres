@@ -1,15 +1,15 @@
-# dependencies
+# Dependencies
 node_modules
 dist
 
-# IDE / system files
+# IDE and environment files
 .vscode
 .vs
 Thumbs.db
 .DS_Store
+.env
 *.log
 .cache
-.env
 
-# build artifacts
+# OS-specific
 *.local

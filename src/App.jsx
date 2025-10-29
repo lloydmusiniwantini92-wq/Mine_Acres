@@ -1,45 +1,61 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Navbar from "./components/Navbar";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Login from "./pages/Login";
-import AdminPanel from "./pages/AdminPanel";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import { AuthProvider, useAuth } from "./auth/AuthContext";
-import TransitionOverlay from "./components/TransitionOverlay";
-
-import Operations from "./pages/Operations";
-import Performance from "./pages/Performance";
-import FinanceSustain from "./pages/FinanceSustain";
-import SmartMine from "./pages/SmartMine";
-
-function AnimatedRoutes() {
-    const location = useLocation();
-    const { user } = useAuth();
-
-    return (
-        <>
-            <TransitionOverlay isActive={!user && location.pathname !== "/login"} />
-            <Navbar />
-            <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/" element={<ProtectedRoute><Operations /></ProtectedRoute>} />
-                    <Route path="/performance" element={<ProtectedRoute><Performance /></ProtectedRoute>} />
-                    <Route path="/finance" element={<ProtectedRoute><FinanceSustain /></ProtectedRoute>} />
-                    <Route path="/smartmine" element={<ProtectedRoute><SmartMine /></ProtectedRoute>} />
-                    <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
-                </Routes>
-            </AnimatePresence>
-        </>
-    );
-}
+import Dashboard from "./pages/Operations";
 
 export default function App() {
+    const [initComplete, setInitComplete] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+
+    useEffect(() => {
+        const sequence = async () => {
+            await new Promise((res) => setTimeout(res, 2000)); // 2s splash
+            setInitComplete(true);
+            await new Promise((res) => setTimeout(res, 800)); // fade delay
+            setShowLogin(true);
+        };
+        sequence();
+    }, []);
+
     return (
-        <AuthProvider>
-            <Router>
-                <AnimatedRoutes />
-            </Router>
-        </AuthProvider>
+        <AnimatePresence mode="wait">
+            {!initComplete ? (
+                <motion.div
+                    key="splash"
+                    className="flex items-center justify-center h-screen bg-[#0e0f12]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                >
+                    <motion.h1
+                        className="text-3xl md:text-5xl font-[Montserrat] text-[var(--accent)] tracking-widest"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.5 }}
+                    >
+                        Initializing Dashboard Systems…
+                    </motion.h1>
+                </motion.div>
+            ) : showLogin ? (
+                <motion.div
+                    key="login"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.2 }}
+                >
+                    <Login />
+                </motion.div>
+            ) : (
+                <motion.div
+                    key="transition"
+                    className="flex items-center justify-center h-screen bg-[#0e0f12]"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                />
+            )}
+        </AnimatePresence>
     );
 }
