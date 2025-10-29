@@ -1,21 +1,9 @@
-# Core ignore rules
 node_modules
 dist
-.env
-.DS_Store
-Thumbs.db
 .vscode
-
-# Vite & React build cache
-.cache
-*.log
-
-# Visual Studio / Windows junk
 .vs
-*.vsidx
-*.user
-*.suo
-
-# OS temp
-$RECYCLE.BIN/
-*.tmp
+.env
+Thumbs.db
+.DS_Store
+*.log
+.cache
