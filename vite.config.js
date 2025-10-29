@@ -5,7 +5,7 @@ const bravePath = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\
 
 export default defineConfig(({ command }) => ({
     plugins: [react()],
-    base: "/Mine_Acres/", // 👈 important for GitHub Pages
+    base: "/Mine_Acres/", // 👈 THIS fixes GitHub Pages blank screen
     server:
         command === "serve"
             ? { port: 5173, open: true, browser: bravePath }
